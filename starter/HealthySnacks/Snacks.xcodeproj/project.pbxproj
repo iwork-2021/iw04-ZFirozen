@@ -12,6 +12,8 @@
 		7BF6C662204818EC00606217 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C661204818EC00606217 /* ViewController.swift */; };
 		7BF6C665204818EC00606217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BF6C663204818EC00606217 /* Main.storyboard */; };
 		7BF6C667204818ED00606217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BF6C666204818ED00606217 /* Assets.xcassets */; };
+		AA3A0417276A6F6E00B257C2 /* FoodImageClassifierBasic .mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = AA3A0415276A6F6E00B257C2 /* FoodImageClassifierBasic .mlmodel */; };
+		AA3A0418276A6F6E00B257C2 /* HealthyFoodImageClassifierBasic.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = AA3A0416276A6F6E00B257C2 /* HealthyFoodImageClassifierBasic.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		7BF6C664204818EC00606217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BF6C666204818ED00606217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BF6C66B204818ED00606217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA3A0415276A6F6E00B257C2 /* FoodImageClassifierBasic .mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "FoodImageClassifierBasic .mlmodel"; sourceTree = "<group>"; };
+		AA3A0416276A6F6E00B257C2 /* HealthyFoodImageClassifierBasic.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HealthyFoodImageClassifierBasic.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,8 @@
 		7BF6C653204818EC00606217 = {
 			isa = PBXGroup;
 			children = (
+				AA3A0415276A6F6E00B257C2 /* FoodImageClassifierBasic .mlmodel */,
+				AA3A0416276A6F6E00B257C2 /* HealthyFoodImageClassifierBasic.mlmodel */,
 				7BF6C65E204818EC00606217 /* Snacks */,
 				7BF6C65D204818EC00606217 /* Products */,
 			);
@@ -135,6 +141,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BF6C662204818EC00606217 /* ViewController.swift in Sources */,
+				AA3A0418276A6F6E00B257C2 /* HealthyFoodImageClassifierBasic.mlmodel in Sources */,
+				AA3A0417276A6F6E00B257C2 /* FoodImageClassifierBasic .mlmodel in Sources */,
 				7BF6C660204818EC00606217 /* AppDelegate.swift in Sources */,
 				7B11BA832048333700D790AA /* CGImagePropertyOrientation.swift in Sources */,
 			);
