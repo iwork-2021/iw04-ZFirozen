@@ -27,6 +27,9 @@
 /// THE SOFTWARE.
 
 import UIKit
+import CoreML
+import Vision
+import CoreMedia
 
 class ViewController: UIViewController {
   
@@ -38,6 +41,25 @@ class ViewController: UIViewController {
   @IBOutlet var resultsConstraint: NSLayoutConstraint!
 
   var firstTime = true
+    
+    lazy var classificationRequest: VNCoreMLRequest = {
+        do{
+            let classifier = try FoodImageClassifierBasic(configuration: MLModelConfiguration())
+            // let classifier = try HealthyFoodImageClassifierBasic(configuration: MLModelConfiguration())
+            
+            let model = try VNCoreMLModel(for: classifier.model)
+            let request = VNCoreMLRequest(model: model, completionHandler: {
+                [weak self] request,error in
+                self?.processObservations(for: request, error: error)
+            })
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+            
+            
+        } catch {
+            fatalError("Failed to create request")
+        }
+    }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -96,6 +118,16 @@ class ViewController: UIViewController {
   }
 
   func classify(image: UIImage) {
+      if let cgImage = image.cgImage {
+          let handler = VNImageRequestHandler(cgImage: cgImage)
+          do {
+              try handler.perform([self.classificationRequest])
+          } catch {
+              print("Failed to perform classification: \(error)")
+          }
+      } else {
+          print("Failed to get CGImage")
+      }
   }
 }
 
@@ -107,5 +139,31 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     imageView.image = image
 
     classify(image: image)
+      showResultsView()
   }
+}
+
+extension ViewController {
+    func processObservations(for request: VNRequest, error: Error?) {
+        if let results = request.results as? [VNClassificationObservation] {
+            if results.isEmpty {
+                self.resultsLabel.text = "Nothing found"
+            } else {
+                let result = results[0].identifier
+                let confidence = results[0].confidence
+                if confidence < 0.6 {
+                    self.resultsLabel.text = "IDK~"
+                } else {
+                    self.resultsLabel.text = result + ": " + String(format: "%.1f%%", confidence * 100)
+                }
+                // self.confidenceLabel.text = String(format: "%.1f%%", confidence * 100)
+                print(result)
+                print(confidence)
+            }
+        } else if let error = error {
+            self.resultsLabel.text = "Error: \(error.localizedDescription)"
+        } else {
+            self.resultsLabel.text = "???"
+        }
+    }
 }
